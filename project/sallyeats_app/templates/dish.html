@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>{{dish.name}}</title>
+</head>
+<body>
+    <div class="sallyImages" style="position:fixed; display:block; width:10%;">
+        <img style="width:100%" alt="Sally xiao long bao" src="{{url_for('static', filename='/images/sallyxlb.jpg')}}">
+        <img style="width:100%" alt="Sally katsu" src="{{url_for('static', filename='/images/sallykatsu.jpg')}}">
+        <img style="width:100%" alt="Sally takoyaki" src="{{url_for('static', filename='/images/sallytakoyaki.jpg')}}">
+        <img style="width:100%" alt="Sally sushi" src="{{url_for('static', filename='/images/sallysushi.jpg')}}">
+        <img style="width:100%"" alt="Sally mochi" src="{{url_for('static', filename='/images/sallymochi.jpg')}}">
+    </div>
+    <div class="sallyImages" style="position:fixed; right:0%; display:block; width:10%;">
+        <img style="width:100%" alt="Sally sausage" src="{{url_for('static', filename='/images/sallysausage.jpg')}}">
+        <img style="width:100%" alt="Sally sando" src="{{url_for('static', filename='/images/sallysando.jpg')}}">
+        <img style="width:100%" alt="Sally pho" src="{{url_for('static', filename='/images/sallypho.jpg')}}">
+        <img style="width:100%" alt="Sally donut" src="{{url_for('static', filename='/images/sallydonut.jpg')}}">
+        <img style="width:100%" alt="Sally nachos" src="{{url_for('static', filename='/images/sallynachos.jpg')}}">
+    </div>
+    <div class="container w-80">
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4 d-flex justify-content-end">
+                {% if session %}
+                    <p class="text-end">
+                        currently logged in as <b><i>{{session['user_username']}}</i></b><br>
+                        <a href="/dashboard">dashboard</a><br>
+                        <a href="/user/{{session['user_username']}}">my profile</a><br>
+                        <a href="/logout">log out</a>
+                    </p>
+                {% else %}
+                    <a href="/login">Sign up or log in</a>
+                {% endif %}
+            </div>
+        </div>
+        <!-- dish image goes here -->
+        <h1 class="text-center" style="margin-top:30px; margin-bottom: 50px;">{{dish.name}}</h1>
+        <div class="row">
+            <div class="col-6">
+                
+                <div style="display:flex; justify-content:center">
+                    <img style="max-width:80%; width:500px;" alt="{{dish.name}}" src= "{{dish.image_link}}">
+                </div>
+            </div>
+            <div class="col-6">
+                <!-- dish info goes here -->
+                <p>{{dish.description}}</p>
+                
+                <div class="d-flex justify-content-center">
+                    <img style="width:40%" alt="Sally enjoying food" src= "{{url_for('static', filename='/images/sally_enjoying_meal.png')}}">
+                </div>
+                <p class="mt-5 text-center"><b>Sally loved this dish!</b><br> Maybe you will too?<br>Check out the restaurant on <a href="{{restaurant.yelp_link}}">Yelp</a> and see how you can try this dish for yourself in person!</p>
+
+                <p class="text-center">
+                    Other dishes at {{restaurant.name}}:<br>
+                    {% for item in dishes: %}
+                    {%if not dish.id == item.id %}
+                    <div class="d-flex justify-content-center mb-2">
+                        <form action="/{{location_url}}/{{restaurant.urlname}}/{{item.urlname}}" method="post">
+                            <input type="hidden" name="dish_id" value="{{item.id}}">
+                            <input type="submit" name="dish_name" value="{{item.name}}">
+                        </form>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+
+                <p class="text-center">Go back to:<br>
+                    <a href="/{{location_url}}/{{restaurant_url}}">{{session['restaurant_name']}}</a> | <a href="/{{location_url}}">{{session['location_name']}}</a> | <a href="/dashboard">dashboard</a></p>
+
+                {% if not user_rated_dish: %}
+                <h6 class="mt-5 text-center">Have you tried this dish? Let other users know by giving it a rating!</h6>
+                {% else: %}
+                <h6 class="mt-5 text-center">Thanks for rating this dish! Your rating will help other users.</h6>
+                {% endif %}
+                <h6 class="text-center mt-3"><i>Average rating for {{dish.name}}:<br></i></h6>
+                    {% if not average_rating: %}
+                    <p class="text-center">This dish has not been rated yet. You can be the first!</p>
+                    {% else: %}
+                    <h6 class="text-center"><i><b>{{average_rating}}</b></i></h6>
+                    {% endif %}
+
+                {% if not user_rated_dish: %}
+                <form action="/{{location_url}}/{{restaurant_url}}/{{dish.urlname}}/rate" method="post">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4 text-center">
+                            <label for="dish_rating">Rate this dish:</label>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="d-flex justify-content-between col-8">    
+                                    <div>
+                                        <input type="radio" id="1" name="dish_rating" value="1" required><br>
+                                        <label for="1">1</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="2" name="dish_rating" value="2" required><br>
+                                        <label for="2">2</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="3" name="dish_rating" value="3" required><br>
+                                        <label for="3">3</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="4" name="dish_rating" value="4" required><br>
+                                        <label for="4">4</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="5" name="dish_rating" value="5" required><br>
+                                        <label for="5">5</label>
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div> 
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="mt-2" value="Submit">
+                    </div>
+                </form>
+                {% else: %}
+                <h6 class="text-center"><i>Your rating:<br>
+                    <b>{{user_rated_dish.dish_rating}}</b></i></h6> 
+                <form action="/{{location_url}}/{{restaurant_url}}/{{dish.urlname}}/updaterating" method="post">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4 text-center">
+                            <label for="dish_rating">Edit/Update your rating:</label>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="d-flex justify-content-between col-8">    
+                                    <div>
+                                        <input type="radio" id="1" name="dish_rating" value="1" required><br>
+                                        <label for="1">1</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="2" name="dish_rating" value="2" required><br>
+                                        <label for="2">2</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="3" name="dish_rating" value="3" required><br>
+                                        <label for="3">3</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="4" name="dish_rating" value="4" required><br>
+                                        <label for="4">4</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="5" name="dish_rating" value="5" required><br>
+                                        <label for="5">5</label>
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div> 
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="mt-2" value="Submit">
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
