@@ -6,7 +6,7 @@
 - [Installation](#installation)
 - [Features](#features)
 - [Preview](#preview)
-- [Licnse](#license)
+- [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 ## Overview
