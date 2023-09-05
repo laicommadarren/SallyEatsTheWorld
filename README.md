@@ -4,7 +4,7 @@
 
 - [Overview](#overview)
 - [Installation](#installation)
-- [Usage and Features](#usage)
+- [Features](#features)
 - [Preview](#preview)
 - [Licnse](#license)
 - [Contact](#contact)
@@ -21,7 +21,7 @@ This app is suitable for people who may not typically be adventurous with trying
 
 npm install
 
-## Usage/Features
+## Features
 
 ### Index
 
