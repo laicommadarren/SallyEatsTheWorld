@@ -4,7 +4,7 @@
 
 - [Overview](#overview)
 - [Installation](#installation)
-- [Usage and Features](#usage/features)
+- [Usage and Features](#usage)
 - [Preview](#preview)
 - [Licnse](#license)
 - [Contact](#contact)
