@@ -9,8 +9,6 @@
 - [Licnse](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
-- 
-- 
 ## Overview
 
 I love to explore regional foods and all types of cuisine. I wanted to be able to share that and allow others to have an easier time to learn about and try foods that may not be familiar.
