@@ -20,60 +20,61 @@ This app is suitable for people who may not typically be adventurous with trying
 
 ## Installation
 
-to be completed
+npm install
 
 ## Features
 
 ### Index
 
-Landing page that allows a user to register/login, or view all events
+Gives a thematic introduction to the use of the app, as well as providing a link to register for an account or login.
 
-### Home Button (top left)
+### Login and Registration
 
-If user is logged in, will redirect to the dashboard. If no user is logged in, redirects to the landing page.
+Create an account as well as logging in and out
 
-### Login Status (top right)
+### Quick Navigation
 
-If user is logged in, will display user's name and show links to the user's profile and to log out.
-
-### Central Navigation Bar (all events, your events, create event)
-
-Allows user to navigate to pages for all events, user's events, and create event. The section corresponding to the current page displayed will be highlighted if applicable.
+Login/Register if not logged in, or quick access to dashboard, user profile, and logging out.
 
 ### Dashboard
 
-Shows up to 2 upcoming events that the user has joined, and 2 upcoming events that the user has hosted. (These may overlap).
+Displays a map of locations with featured restaurants/dishes. Current version has Los Angeles as its only option.
 
-### All Events
+Click the button with the city's name to access restaurants page.
 
-Shows all events, with pagination showing 5 per page. Current page will be highlighted in the page bar.
+Also shows notifications, currently including friend requests.
 
-### Your Events
+### Location/City Page
 
-Shows all of user's joined events, or events the user is hosting depending on which section is selected.
+Displays a map of restaurants featured in selected location.
 
-### Create Event
+Click the button with a restaurant name to go to that restaurant's page.
 
-### Event Page
+### Restaurant Page
 
-shows information for selected event. Allows user to see yelp page and google maps page for the event location.
+Shows an image of the outside of the restaurant, and introduces users to three characteristic dishes of that restaurant.
 
-Allows users to join the event if not joined already, and shows a list of attendees. 
+Click the button for the respective dish to go to the dish's page.
 
-If user is the host, allows user to edit the event. 
+### Dish Page
 
-If user joined the event, allows user to see and post comments.
+Shows a representative image of the selected dish. Provides a description of the dish and its background. Some descriptions are filled out while others are to be updated.
+
+Can also view other dishes from the restaurant by clicking the respective button.
+
+Yelp link included for users to find out more about the restaurant serving this dish.
+
+User can rate the dish if they tried it, and see the aggregate user rating.
 
 ### Profile Page
 
-On own page, the user can see a list of which users they are following.
+On own page, the user can see their top 5 rated dishes.
 
-On others' pages, allows logged in user to follow the respective user.
-
+On others' pages, the logged in user can add the selected user as a friend, as well as see their top 5 rated dishes.
 
 ## Preview
 
-to be added
+[Project Demo](https://youtu.be/Iy9ZQWMGWno)
 
 ## License
 
@@ -82,7 +83,11 @@ to be added
 ## Contact
 
 LinkedIn:
+
 https://www.linkedin.com/in/laicommadarren/
 
 ## Acknowledgements
-Many css styling resources aided me in creating the buttons and navigation bars, as well as choose a color scheme relating to boba milk tea. 
+
+Yelp Fusion API provides all of the restaurant data.
+
+https://javascript.plainenglish.io/create-a-simple-city-autocomplete-field-in-react-f7675d249c74#5057 was used to get a template for creating autocomplete function for location input.
